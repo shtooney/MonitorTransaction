@@ -2,7 +2,7 @@ public class MonitorMe implements TxnSecurity.PolicyCondition {
 
     /** Purpose of MonitorMe:
      * If you're the system admin, this method will allow this policy to be ran on you
-     * if you're not a system admin, it will ignore you
+     * if you're not a system admin, it will ignore you (so if you sign in as someone else, you won't get an email, etc)
      */ 
      
     public boolean evaluate(TxnSecurity.Event e) {  

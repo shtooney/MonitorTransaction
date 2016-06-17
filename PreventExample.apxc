@@ -1,0 +1,19 @@
+public class PreventExample implements TxnSecurity.PolicyCondition {
+     
+    public boolean evaluate(TxnSecurity.Event e) {  
+
+        //Plumbing done to track Counter
+        List<User> ourUser = [Select Id, ProfileId, Counter__c from User where Id = :e.UserId];
+        Decimal myCounter = ourUser[0].Counter__c; 
+        String objUsersProfile = ourUser[0].ProfileId;
+        List<Profile> ourProfile = [Select Id, Name from Profile where Name ='Standard Platform User' limit 1];
+        String stPlatformUser = ourProfile[0].Id;
+        
+  //If your login counter is at 3, then prevent user from joining
+        if((myCounter >= 3) && (objUsersProfile == stPlatformUser)){
+                return true;
+            }
+  //If your login counter is less than 3, then login        
+            return false;
+  }
+}

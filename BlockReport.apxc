@@ -1,0 +1,9 @@
+global class BlockReport implements TxnSecurity.PolicyCondition {
+  public boolean evaluate(TxnSecurity.Event e) {
+    Integer numberOfRecords = Integer.valueOf(e.data.get('NumberOfRecords'));
+      if (numberOfRecords >= 15) {
+        return true;
+      }
+      return false;
+  }
+}
